@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+.wrapper {
+    height: 100%;
+}
+
+.content {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding-bottom: 90px;
+}
+
+.footer {
+    height: 80px;
+    margin-top: -80px;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.footer-bs {
+    background-color: #3c3d41;
+    padding: 10px 20px;
+    color: rgba(255,255,255,1.00);
+    margin-bottom: 0px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 6px;
+}
+
+    .footer-bs .footer-brand, .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+        padding: 10px 25px;
+    }
+
+    .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+        border-color: transparent;
+    }
+
+    .footer-bs .footer-brand h2 {
+        margin: 0px 0px 10px;
+    }
+
+    .footer-bs .footer-brand p {
+        font-size: 12px;
+        color: rgba(255,255,255,0.70);
+    }
+
+    .footer-bs .footer-nav ul.pages {
+        list-style: none;
+        padding: 0px;
+    }
+
+        .footer-bs .footer-nav ul.pages li {
+            padding: 5px 0px;
+        }
+
+        .footer-bs .footer-nav ul.pages a {
+            color: rgba(255,255,255,1.00);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+            .footer-bs .footer-nav ul.pages a:hover {
+                color: rgba(255,255,255,0.80);
+                text-decoration: none;
+            }
+
+    .footer-bs .footer-nav h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+    }
+
+    .footer-bs .footer-nav ul.list {
+        list-style: none;
+        padding: 0px;
+    }
+
+        .footer-bs .footer-nav ul.list li {
+            padding: 5px 0px;
+        }
+
+        .footer-bs .footer-nav ul.list a {
+            color: rgba(255,255,255,0.80);
+        }
+
+            .footer-bs .footer-nav ul.list a:hover {
+                color: rgba(255,255,255,0.60);
+                text-decoration: none;
+            }
+
+    .footer-bs .footer-social ul {
+        list-style: none;
+        padding: 0px;
+    }
+
+    .footer-bs .footer-social h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    .footer-bs .footer-social li {
+        padding: 5px 4px;
+    }
+
+    .footer-bs .footer-social a {
+        color: rgba(255,255,255,1.00);
+    }
+
+        .footer-bs .footer-social a:hover {
+            color: rgba(255,255,255,0.80);
+            text-decoration: none;
+        }
+
+    .footer-bs .footer-ns h4 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+    }
+
+    .footer-bs .footer-ns p {
+        font-size: 12px;
+        color: rgba(255,255,255,0.70);
+    }
+
+@media (min-width: 768px) {
+    .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns {
+        border-left: solid 1px rgba(255,255,255,0.10);
+    }
+}
+
+/* Styling the Body element i.e. Color,
+        Font, Alignment */
+body {
+    background-color: rgba(255,255,255,0.60);
+    font-family: Verdana;
+}
+
+
+
+/* Styling form-control Class */
+.form-control {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+    /* Styling form-control Label */
+    .form-control label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Styling form-control input,
+        select, textarea */
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+        border: 1px solid #777;
+        border-radius: 2px;
+        font-family: inherit;
+        padding: 10px;
+        display: block;
+        width: 95%;
+    }
+
+        /* Styling form-control Radio
+        button and Checkbox */
+        .form-control input[type="radio"],
+        .form-control input[type="checkbox"] {
+            display: inline-block;
+            width: auto;
+        }
+
+/* Styling Button */

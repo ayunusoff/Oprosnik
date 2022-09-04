@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Oprosnik.Models.Survey>
+@using System.Web
+@using System.Text
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Опросы</h1>
+
+<table class="table">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)    
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <form asp-controller="Surveys" asp-action="Details" asp-route-id="@item.Id">
+                    <button>Пройти опрос</button>
+                </form>
+            </td>
+        </tr>
+}  
+</table>

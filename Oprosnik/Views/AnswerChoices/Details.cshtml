@@ -1,0 +1,30 @@
+﻿@model Oprosnik.Models.AnswerChoice
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>AnswerChoice</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Text_Choice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Text_Choice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.correct_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.correct_answer)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

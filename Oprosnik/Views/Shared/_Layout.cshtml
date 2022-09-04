@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Oprosnik</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Oprosnik.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="wrapper">
+    <div class="content">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Oprosnik</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная страница</a>
+                        </li>
+                        @using Microsoft.AspNetCore.Identity
+                        @inject UserManager<IdentityUser> userManager
+                        @{
+
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Surveys" asp-action="MySurveys" asp-route-id="@userManager.GetUserId(User)">
+                                        Мои опросы
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Surveys" asp-action="Index">Пройти опрос</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">О проекте</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    </div>
+    <footer class="footer-bs">
+        <div class="row">
+            <div class="col-md-3 footer-brand animated fadeInLeft">
+                <h2>Опросник</h2>
+                <p>Тестовый проект для вакансии ASP.NET MVC - разработчика</p>
+                <p>@DateTime.Now.Year</p>
+            </div>
+            <div class="col-md-4 footer-nav animated fadeInUp">
+                <h4>Menu</h4>
+                <div class="col-md-6">
+                    <ul class="pages">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>
+                        <li><a asp-area="" asp-controller="Surveys" asp-action="Index">Опросы</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="AboutMe">О проекте</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2 footer-social animated fadeInDown">
+                <h4>Контакты</h4>
+                <ul>
+                    <li>GitHub:<br><a href="https://github.com/ayunusoff/Oprosnik"> Oprosnik</a></li>
+                    <li>GMail:<br><a href="mailto:321art81@gmail.com"> 321art81@gmail.com</a></li>
+                    <li>Phone number:<br><a href="tel:89514686367"> +79514686367</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

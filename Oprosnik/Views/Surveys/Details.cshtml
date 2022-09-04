@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Oprosnik.Models.Question>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+
+@{
+    ViewData["Title"] = $"Details";
+}
+
+<h1>@ViewData["SurveyTitle"]</h1>
+<form asp-action="Create">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                
+                
+                <input type="checkbox" name="answer" id="a" class="answer">
+                <label for="a" id="a_text">@Html.DisplayFor(modelItem => item.Text_Quest)</label>
+                @Html.DisplayFor(modelItem => item.Text_Quest)
+                
+            </td>
+        </tr>
+    }
+    @*{
+        var userans = new Oprosnik.Models.UserAnswer()
+            {
+                user = (Oprosnik.Models.User)await userManager.GetUserAsync(User),
+                answerChoice = item,
+                question = item
+            };
+    }*@
+</form>
+<div class="quiz-box" id="quiz">
+    <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+            <li>
+                <input type="checkbox" name="answer" id="a" class="answer">
+                <label for="a" id="a_text">Question</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="b" id="b_text">Question</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="c" id="c_text">Question</label>
+            </li>
+        </ul>
+    </div>
+    <button id="submit">Submit</button>
+</div>
+<div>
+    <a asp-action="Index">К списку опросов</a>
+</div>

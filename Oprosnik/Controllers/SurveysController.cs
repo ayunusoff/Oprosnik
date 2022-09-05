@@ -24,19 +24,30 @@ namespace Oprosnik.Controllers
         // GET: Surveys/UserId
         public IActionResult MySurveys(int id)
         {
-            var surveys = (
-                from survey in _context.Survey
-                join question in _context.Question
-                on survey equals question.survey
-                join userans in _context.UserAnswer
-                on question equals userans.question
-                join user in _context.User
-                on userans.user equals user
-                where id.ToString() == user.Id
-                select survey
-            );
+            var surveys = _context.Survey.Join(_context.Question, // второй набор
+                 s => s, // свойство-селектор объекта из первого набора
+                 q => q.survey, // свойство-селектор объекта из второго набора
+                 (s, q) => new // результат
+                 {
+                     title = s.Title,
+                     description = s.Description
+                 });
 
-            return View(surveys);
+            /*
+            var surveys = (
+            from survey in _context.Survey
+            join question in _context.Question
+            on survey equals question.survey
+            join userans in _context.UserAnswer
+            on question equals userans.question
+            join user in _context.User
+            on userans.user equals user
+            where id.ToString() == user.Id
+            select survey
+        );
+            */
+
+            return View(surveys.ToList());
         }
         // GET: Surveys/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,13 +57,16 @@ namespace Oprosnik.Controllers
                 return NotFound();
             }
 
+
+            var quests = _context.Question.Where(s => s.survey.Id == id).ToList();
+            /*
             var quests = (
                 from surveys in _context.Survey
                 join questions in _context.Question
                 on surveys equals questions.survey
                 where surveys.Id == id
                 select questions
-                );
+                );*/
             if (quests == null)
             {
                 return NotFound();

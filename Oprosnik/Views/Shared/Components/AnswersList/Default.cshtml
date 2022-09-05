@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Oprosnik.Models.AnswerChoice>
+<ul>
+@foreach (var item in Model)
+{
+    <li>
+        item.Text_Choice
+    </li>
+}
+</ul>

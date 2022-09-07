@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Oprosnik.Data;
 using Oprosnik.Models;
+using System.Net;
 
 namespace Oprosnik.Controllers
 {
+    [Authorize]
     public class UserAnswersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,20 +49,32 @@ namespace Oprosnik.Controllers
             return View();
         }
 
-        // POST: UserAnswers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserAnswer userAnswer)
+        public async Task<IActionResult> Create([FromForm] string userId, [FromForm] int anschoiceId, [FromForm] int questionId)
         {
+            var quest = await _context.Question.FindAsync(questionId);
+            var usr = await _context.Users.FindAsync(userId);
+            var anschoice = await _context.AnswerChoice.FindAsync(anschoiceId);
+
+            if (usr == null || quest == null || anschoice == null)
+            {
+                return StatusCode((int)HttpStatusCode.NotAcceptable);
+            }
+
+            UserAnswer userAnswer = new UserAnswer
+            {
+                question = quest,
+                answerChoice = anschoice,
+                user = usr
+            };
+
             if (ModelState.IsValid)
             {
-                _context.Add(userAnswer);
+                await _context.UserAnswer.AddAsync(userAnswer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect(Request.Headers["Referer"].ToString());
             }
-            return View(userAnswer);
+            return NoContent();
         }
 
         // GET: UserAnswers/Edit/5
@@ -78,12 +93,8 @@ namespace Oprosnik.Controllers
             return View(userAnswer);
         }
 
-        // POST: UserAnswers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] UserAnswer userAnswer)
+        public async Task<IActionResult> Edit(int id, UserAnswer userAnswer)
         {
             if (id != userAnswer.Id)
             {

@@ -1,2 +1,22 @@
 ﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+    $("#FileUploadForm").submit(function (e) {
+        $.ajax({
+            type: 'POST',
+            url: '/UserAnswers/Create',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (res) {
+                    if (res.isValid) {
+                        $('#result').html(res.html)
+                    }
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+        })
+    }
+</script>

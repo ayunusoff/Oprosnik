@@ -21,7 +21,6 @@ namespace Oprosnik.Controllers
                         View(await _context.AnswerChoice.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.AnswerChoice'  is null.");
         }
-
         // GET: AnswerChoices/Details/5
         public async Task<IActionResult> Details(int? id)
         {

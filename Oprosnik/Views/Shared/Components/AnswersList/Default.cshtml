@@ -1,9 +1,28 @@
 ﻿@model IEnumerable<Oprosnik.Models.AnswerChoice>
-<ul>
-@foreach (var item in Model)
+@using Microsoft.AspNetCore.Identity
+@using System.Web
+@inject UserManager<IdentityUser> userManager
+
+@*Html.BeginForm("Create", "UserAnswers", FormMethod.Post, new { id = "formActionsChoices", name = "a"})*@
+<form asp-controller="UserAnswers" asp-action="Create" id="formActionsChoices" method="post">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @Html.RadioButton(item.question.Id.ToString(), "checked")
+                @Html.Hidden($"anschoiceId", item.Id)
+                @Html.Hidden("userId", userManager.GetUserId(User))
+                @Html.Hidden("questionId", item.question.Id)
+                @item.Text_Choice
+            </li>
+        }
+    </ul>
+    <input class="btn btn-light" type="submit" value="Ответить" onclick="submitAnswer()">
+</form>
+<div id="results"></div>
+@section Scripts 
 {
-    <li>
-        item.Text_Choice
-    </li>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");  
+    }
 }
-</ul>
